@@ -63,6 +63,9 @@ posts.forEach(function(currentElement){
 
     let itDate = currentElement.created.split("-").reverse().join("-");
     
+    if (currentElement.author.image == null) {
+
+    }
 
         postElement.innerHTML +=  `        
         <div class="post">
@@ -90,7 +93,7 @@ posts.forEach(function(currentElement){
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${currentElement.likes}</b> persone
+                    Piace a <b id="like-counter-${currentElement.id}" class="js-likes-counter">${currentElement.likes}</b> persone
                 </div>
             </div> 
         </div>            
@@ -101,7 +104,7 @@ posts.forEach(function(currentElement){
     
 let likeButton = document.querySelectorAll(".like-button");
 let likeNumber = document.querySelectorAll(".js-likes-counter");
-
+let idArray = [];
 
 
 likeButton.forEach(function (button, count) {
@@ -110,11 +113,9 @@ likeButton.forEach(function (button, count) {
         likeNumber[count].innerHTML ++;
         button.classList.toggle("like-button--liked");
         
-
-        const idArray = posts.map (function() {
-            return Number(posts.id); 
-        });
-        
+        const postId = button.dataset.postid;
+        let idCounter = document.querySelector(`#like-counter-${postId}`).innerText;
+        idArray.push(idCounter);
         console.log(idArray);
     })
 
