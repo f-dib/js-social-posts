@@ -60,6 +60,10 @@ let postElement = document.getElementById("container");
 
 posts.forEach(function(currentElement){
 
+
+    let itDate = currentElement.created.split("-").reverse().join("-");
+    
+
         postElement.innerHTML +=  `        
         <div class="post">
         <div class="post__header">
@@ -69,7 +73,7 @@ posts.forEach(function(currentElement){
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${currentElement.author.name}</div>
-                    <div class="post-meta__time">${currentElement.created}</div>
+                    <div class="post-meta__time">${itDate}</div>
                 </div>                    
             </div>
         </div>
@@ -92,5 +96,28 @@ posts.forEach(function(currentElement){
         </div>            
         </div>`;
 
+
 });
+    
+let likeButton = document.querySelectorAll(".like-button");
+let likeNumber = document.querySelectorAll(".js-likes-counter");
+
+
+
+likeButton.forEach(function (button, count) {
+    button.addEventListener("click", function(clicked){
+        clicked.preventDefault();
+        likeNumber[count].innerHTML ++;
+        button.classList.toggle("like-button--liked");
+        
+
+        const idArray = posts.map (function() {
+            return Number(posts.id); 
+        });
+        
+        console.log(idArray);
+    })
+
+});
+
 
