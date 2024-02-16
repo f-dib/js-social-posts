@@ -58,14 +58,10 @@ const posts = [
 
 let postElement = document.getElementById("container");
 
-posts.forEach(function(currentElement){
+posts.forEach(function(currentElement, index){
 
 
     let itDate = currentElement.created.split("-").reverse().join("-");
-    
-    if (currentElement.author.image == null) {
-
-    }
 
         postElement.innerHTML +=  `        
         <div class="post">
@@ -99,6 +95,16 @@ posts.forEach(function(currentElement){
         </div>            
         </div>`;
 
+        let profPicture = document.querySelectorAll(".post-meta__icon");
+
+
+        if (currentElement.author.image == null) {
+            let profName = currentElement.author.name.split(" ").map((n)=>n[0]).join("");
+            profPicture[index].removeChild;
+            profPicture[index].innerHTML = `<div class="profile-pic-default">
+                                                    <span>${profName}</span>
+                                            </div>`;
+        }
 
 });
     
@@ -108,17 +114,68 @@ let idArray = [];
 
 
 likeButton.forEach(function (button, count) {
+
     button.addEventListener("click", function(clicked){
+
         clicked.preventDefault();
-        likeNumber[count].innerHTML ++;
         button.classList.toggle("like-button--liked");
-        
+        likeNumber[count].innerHTML ++;
+
+
         const postId = button.dataset.postid;
-        let idCounter = document.querySelector(`#like-counter-${postId}`).innerText;
-        idArray.push(idCounter);
+        idArray.push(postId);
         console.log(idArray);
     })
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// EXPERIMENT
+
+
+// likeButton.forEach(function (button, count) {
+
+//     button.addEventListener("click", function(clicked){
+//         let buttonClicked = likeButton.classList.contains("like-button--liked");
+//         clicked.preventDefault();
+//         button.classList.toggle("like-button--liked");
+
+//         if (buttonClicked) {
+
+//             likeNumber[count].innerHTML --;
+//             buttonClicked.classList.remove("like-button--liked");         
+
+//         } else {
+        
+//             likeNumber[count].innerHTML ++;
+//             buttonClicked;
+
+//         }
+
+//         const postId = button.dataset.postid;
+//         idArray.push(postId);
+//         console.log(idArray);
+//     })
+
+// });
 
 
