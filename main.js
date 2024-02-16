@@ -56,13 +56,16 @@ const posts = [
     }
 ];
 
+// I create a variable that takes an element of the html
 let postElement = document.getElementById("container");
 
+// I open a loop that allows me to show all the elements in the object on the screen
 posts.forEach(function(currentElement, index){
 
-
+    // I set the date in Italian format
     let itDate = currentElement.created.split("-").reverse().join("-");
 
+        // I insert all the html code into the created variable, modifying the sections based on the elements present in the object
         postElement.innerHTML +=  `        
         <div class="post">
         <div class="post__header">
@@ -95,9 +98,13 @@ posts.forEach(function(currentElement, index){
         </div>            
         </div>`;
 
+        // I create a variable that takes the parent html element of the profile picture
         let profPicture = document.querySelectorAll(".post-meta__icon");
 
-
+        // I create a condition such that if there is no profile picture,
+        // remove the img element,
+        // replace it with a div with an assigned class that handles a small text,
+        // the initials of the name are taken into a variable and inserted into the created div.
         if (currentElement.author.image == null) {
             let profName = currentElement.author.name.split(" ").map((n)=>n[0]).join("");
             profPicture[index].removeChild;
@@ -107,35 +114,51 @@ posts.forEach(function(currentElement, index){
         }
 
 });
-    
+
+
 let likeButton = document.querySelectorAll(".like-button");
 let likeNumber = document.querySelectorAll(".js-likes-counter");
 let idArray = [];
 
-
+// I open a loop for the buttons, with an event listener inside it
 likeButton.forEach(function (button, count) {
 
     button.addEventListener("click", function(clicked){
         
+        // I create a variable that adds the class when the button is clicked
+        // I take the value present in the ids of the object elements
+        // I insert the position of the element into the arrayElement variable with indexOf
         let buttonClicked = button.classList.contains("like-button--liked");
         clicked.preventDefault();
         const postId = button.dataset.postid;
-        idArray.push(postId);
+        const arrayElement = idArray.indexOf(postId);
 
-
+        // If the button already has the assigned class,
+        // removes it, and removes the like from the count
+        // Checks if the id is already present in the idArray and cuts it
         if (buttonClicked) {
 
             likeNumber[count].innerHTML --;
-            button.classList.remove("like-button--liked");         
+            button.classList.remove("like-button--liked");  
+            
+            if (idArray.includes(postId)){
+
+                idArray.splice(arrayElement, 1);
+
+            }
 
         } else {
-        
+            
+            // If the class is not present on the button, 
+            // adds it, increases the like count
+            // and push the id into the array
             likeNumber[count].innerHTML ++;
             button.classList.add("like-button--liked");
+            idArray.push(postId);
 
         }
 
-
+        // Shows the IDs of the posts we have liked in the console
         console.log(idArray);
     })
 
