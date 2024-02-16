@@ -116,66 +116,29 @@ let idArray = [];
 likeButton.forEach(function (button, count) {
 
     button.addEventListener("click", function(clicked){
-
+        
+        let buttonClicked = button.classList.contains("like-button--liked");
         clicked.preventDefault();
-        button.classList.toggle("like-button--liked");
-        likeNumber[count].innerHTML ++;
-
-
         const postId = button.dataset.postid;
         idArray.push(postId);
+
+
+        if (buttonClicked) {
+
+            likeNumber[count].innerHTML --;
+            button.classList.remove("like-button--liked");         
+
+        } else {
+        
+            likeNumber[count].innerHTML ++;
+            button.classList.add("like-button--liked");
+
+        }
+
+
         console.log(idArray);
     })
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// EXPERIMENT
-
-
-// likeButton.forEach(function (button, count) {
-
-//     button.addEventListener("click", function(clicked){
-//         let buttonClicked = likeButton.classList.contains("like-button--liked");
-//         clicked.preventDefault();
-//         button.classList.toggle("like-button--liked");
-
-//         if (buttonClicked) {
-
-//             likeNumber[count].innerHTML --;
-//             buttonClicked.classList.remove("like-button--liked");         
-
-//         } else {
-        
-//             likeNumber[count].innerHTML ++;
-//             buttonClicked;
-
-//         }
-
-//         const postId = button.dataset.postid;
-//         idArray.push(postId);
-//         console.log(idArray);
-//     })
-
-// });
 
 
